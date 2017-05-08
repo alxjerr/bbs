@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tieba.domain">
+        <class name="Reply" table="t_reply">
+            <id name="id">
+                <generator class="native"></generator>
+            </id>
+            <property name="replyContent"></property>
+            <property name="ipAddr"></property>
+            <property name="createDate"></property>
+
+            <many-to-one name="topic" class="Topic" column="topic_id"></many-to-one>
+        </class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!-- 开发模式，提示信息全 -->
+    <constant name="struts.devMode" value="true"/>
+    <!-- struts标签主题：没有，struts标签回显 -->
+    <constant name="struts.ui.theme" value="simple"/>
+
+    <package name="defalut" namespace="/" extends="struts-default">
+        <!-- 3 主题action -->
+        <action name="topicAction_*" class="com.tieba.web.action.TopicAction" method="{1}">
+            <!-- 3.1 查询所有  -->
+            <result name="findAll">/WEB-INF/jsp/listTopics.jsp</result>
+            <!-- 3.2 添加成功，重定向到查询所有 -->
+            <result name="add" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">topicAction_findAll</param>
+            </result>
+            <!-- 3.3通过id查询详情 -->
+            <result name="findById">/WEB-INF/jsp/showTopic.jsp</result>
+        </action>
+        <!-- 4 回复action -->
+        <action name="replyAction_*" class="com.tieba.web.action.ReplyAction" method="{1}">
+            <!-- 4.1 添加成功 ,重定向到通过id查询主题-->
+            <result name="add" type="redirectAction">topicAction_findById?id=${topic.id}</result>
+        </action>
+    </package>
+</struts>

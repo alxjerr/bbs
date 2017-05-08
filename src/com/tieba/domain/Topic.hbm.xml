@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.tieba.domain">
+    <class name="Topic" table="t_topic">
+        <id name="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="title" length="120"></property>
+        <property name="ipAddr" length="15"></property>
+        <property name="lastRelyDate" type="timestamp"></property>
+        <property name="topicContent" length="500"></property>
+        <property name="createDate">
+            <column name="createDate" sql-type="datetime"></column>
+        </property>
+
+        <set name="replySet" order-by="createDate asc">
+            <key column="topic_id"></key>
+            <one-to-many class="com.tieba.domain.Reply"></one-to-many>
+        </set>
+    </class>
+
+
+</hibernate-mapping>
